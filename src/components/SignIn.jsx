@@ -1,7 +1,23 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
+import { userValidation } from "../utils/validations";
 
 const SignIn = () => {
+  const email = useRef(null);
+  const password = useRef(null);
+  let msg = "";
+
+  const [errMsg, seterrMsg] = useState("");
+
+  const handleClick = () => {
+    if (!email.current.value.length || !password.current.value.length)
+      console.log("Fields can't be as empty..!");
+    else {
+      msg = userValidation(email.current.value, password.current.value);
+    }
+    seterrMsg(msg);
+  };
+
   return (
     <div
       id="container"
@@ -13,16 +29,24 @@ const SignIn = () => {
         </div>
         <div className="flex flex-col">
           <input
+            ref={email}
             className="p-2 text-gray-200 text-xs bg-gray-800 rounded-sm my-1"
             placeholder="Email or phone number"
           />
           <input
+            ref={password}
             className="p-2 text-gray-200 text-xs bg-gray-800 rounded-sm my-1"
             placeholder="Password"
           />
         </div>
+        <div id="error div">
+          <p className="text-red-600 text-xs">{errMsg}</p>
+        </div>
         <div className="mt-5">
-          <button className="text-white w-full font-bold text-xs bg-red-600 px-4 py-2 rounded-sm hover:bg-red-700 cursor-pointer transition duration-300">
+          <button
+            className="text-white w-full font-bold text-xs bg-red-600 px-4 py-2 rounded-sm hover:bg-red-700 cursor-pointer transition duration-300"
+            onClick={handleClick}
+          >
             Sign In
           </button>
         </div>
