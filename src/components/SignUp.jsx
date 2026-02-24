@@ -1,12 +1,13 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { userValidation } from "../utils/validations";
+import { userValidation, userRegister } from "../utils/authentication";
 
 const SignUp = () => {
   const email = useRef(null);
   const password = useRef(null);
   const comformPass = useRef(null);
   const firstName = useRef(null);
+  const lastName = useRef(null);
   let msg = "";
 
   const [errMsg, seterrMsg] = useState("");
@@ -22,6 +23,18 @@ const SignUp = () => {
       }
     }
     seterrMsg(msg);
+
+    if(!msg)
+    {
+        const data = {
+            first_name:firstName.current.value,
+            last_name:lastName.current.value,
+            email:email.current.value,
+            password:password.current.value
+        }
+        const auth = userRegister(data)
+        console.log("Response: ", auth);
+    }
   };
 
   return (
@@ -40,6 +53,7 @@ const SignUp = () => {
             placeholder="First Name"
           />
           <input
+            ref={lastName}
             className="p-2 w-6/12 text-gray-200 text-xs bg-gray-800 rounded-sm my-1 mr-1"
             placeholder="Last Name"
           />

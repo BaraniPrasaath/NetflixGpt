@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import { userValidation } from "../utils/validations";
+import { userLogin, userValidation } from "../utils/authentication";
 
 const SignIn = () => {
   const email = useRef(null);
@@ -16,6 +16,16 @@ const SignIn = () => {
       msg = userValidation(email.current.value, password.current.value);
     }
     seterrMsg(msg);
+
+    if(!msg)
+    {
+        const data = {
+            email:email.current.value,
+            password:password.current.value
+        }
+        const auth = userLogin(data)
+        console.log("Response: ", auth);
+    }
   };
 
   return (
