@@ -21,7 +21,8 @@
       2. Login to Firebase - firebase login
       3. Initialize Firebase - firebase init, then select hoisting
       4. Deployment - firebase deploy
- - Configured with firebase & Deployed The Application to "https://netflixgpt-fc73a.web.app/";
+ - Configured with firebase & Deployed The Application to "https://netflixgpt-fc73a.web.app/"
+ - Now Implement the authentication using Firebase Backend. (this is not completed because of some issues)
 
 # Building Features
  - Login/sign-up pages
